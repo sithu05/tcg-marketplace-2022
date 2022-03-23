@@ -36,7 +36,7 @@ const PokemonCard__Info = ({ name, rarity, price, stocks }: Props) => {
             <Stack
                 mt="6px"
                 direction="row"
-                color="#6A6969"
+                color="brand.secondary"
                 fontSize="20px"
                 spacing="30px"
             >
