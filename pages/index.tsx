@@ -36,7 +36,7 @@ const Home: NextPage = () => {
 			</Grid>
 
 			{!isLoading && (
-				<Center ref={ref} textAlign="center">
+				<Center ref={ref}>
 					<ShowMore />
 				</Center>
 			)}
