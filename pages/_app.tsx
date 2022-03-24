@@ -6,6 +6,7 @@ import { QueryClient, QueryClientProvider } from 'react-query';
 import theme from '../theme';
 
 import { Header } from '../components/Header';
+import { Footer } from '../components/Footer';
 
 function MyApp({ Component, pageProps }: AppProps) {
 	const [queryClient] = useState(() => new QueryClient());
@@ -15,6 +16,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 			<ChakraProvider theme={theme}>
 				<Header/>
 				<Component {...pageProps} />
+				<Footer />
 			</ChakraProvider>
 		</QueryClientProvider>
 	);
