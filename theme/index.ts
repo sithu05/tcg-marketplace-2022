@@ -6,7 +6,8 @@ const overrides = {
     styles,
     colors: {
         brand: {
-            secondary: '#6A6969'
+            secondary: '#6A6969',
+            placeholder: '#BCBBBB'
         }
     }
 };

@@ -9,10 +9,26 @@ type Response = {
     totalCount: number;
 }
 
-export const useCards = () => {
-    return useInfiniteQuery('cards',
+type Props = {
+    name?: string;
+}
+
+export const useCards = ({ name }: Props) => {
+    let url = 'https://api.pokemontcg.io/v2/cards?pageSize=5';
+
+    let query = '';
+
+    if (name) {
+        query += `name:"${name}"`;
+    }
+
+    if (query) {
+        url += `&q=${query}`;
+    }
+
+    return useInfiniteQuery(['cards', `${name}`],
         ({ pageParam = 1 }) => {
-            return fetch(`https://api.pokemontcg.io/v2/cards?pageSize=5&page=${pageParam}`)
+            return fetch(`${url}&page=${pageParam}`)
                 .then(response => response.json())
                 .then<Response>(response => response)
         },
