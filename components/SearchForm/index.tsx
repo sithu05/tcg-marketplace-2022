@@ -1,4 +1,4 @@
-import { Flex } from "@chakra-ui/react"
+import { Box, Flex } from "@chakra-ui/react"
 import { Form, Formik } from "formik"
 
 import { SearchForm__Input } from "./SearchForm__Input"
@@ -27,11 +27,16 @@ export const SearchForm = ({ onSubmit }: Props) => {
                 initialValues={initialValues}
                 onSubmit={onSubmit}
             >
-                <Form>
-                    <SearchForm__Input />
+                <Box
+                    width="full"
+                    maxWidth="383px"
+                >
+                    <Form>
+                        <SearchForm__Input />
 
-                    <SearchForm__AutoSubmit />
-                </Form>
+                        <SearchForm__AutoSubmit />
+                    </Form>
+                </Box>
             </Formik>
         </Flex>
     )
