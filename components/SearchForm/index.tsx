@@ -1,11 +1,17 @@
-import { Box, Flex } from "@chakra-ui/react"
+import { Box, Flex, Input, Select, Stack } from "@chakra-ui/react"
 import { Form, Formik } from "formik"
 
 import { SearchForm__Input } from "./SearchForm__Input"
 import { SearchForm__AutoSubmit } from "./SearchForm__AutoSubmit";
+import { SearchForm__Type } from "./SearchForm__Type";
+import { SearchForm__Rarity } from "./SearchForm__Rarity";
+import { SearchForm__Set } from "./SearchForm__Set";
 
 export interface SearchFormValues {
     name: string;
+    type: string;
+    rarity: string;
+    set: string;
 }
 
 type Props = {
@@ -15,7 +21,10 @@ type Props = {
 
 export const SearchForm = ({ onSubmit }: Props) => {
     const initialValues: SearchFormValues = {
-        name: ''
+        name: '',
+        type: '',
+        rarity: '',
+        set: ''
     };
 
     return (
@@ -33,6 +42,15 @@ export const SearchForm = ({ onSubmit }: Props) => {
                 >
                     <Form>
                         <SearchForm__Input />
+
+                        <Stack
+                            mt="16px"
+                            spacing="16px"
+                            direction="row">
+                            <SearchForm__Type />
+                            <SearchForm__Rarity />
+                            <SearchForm__Set />
+                        </Stack>
 
                         <SearchForm__AutoSubmit />
                     </Form>
