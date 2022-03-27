@@ -7,8 +7,11 @@ import { CartContextState } from "../types/CartContextState"
 
 const defaultValues: CartContextState = {
     cart: [],
-    addToCart: (card: Card) => {},
-    clearAll: () => {}
+    addToCart: () => {},
+    clearAll: () => {},
+    increase: () => {},
+    decrease: () => {},
+    remove: () => {}
 };
 
 const CartContext = createContext<CartContextState>(defaultValues);
@@ -32,11 +35,42 @@ export const CartWrapper: FC = ({ children }) => {
         setCart([]);
     }
 
+    function increase(id: number) {
+        setCart(
+            produce(cart, state => {
+                const index = state.findIndex(item => item.id === id);
+
+                if (index > -1) {
+                    state[index].qty += 1;
+                }
+            })
+        )
+    }
+
+    function decrease(id: number) {
+        setCart(
+            produce(cart, state => {
+                const index = state.findIndex(item => item.id === id);
+
+                if (index > -1) {
+                    state[index].qty -= 1;
+                }
+            })
+        )
+    }
+
+    function remove(id: number) {
+        setCart(cart.filter(item => item.id !== id));
+    }
+
     return (
         <CartContext.Provider value={{
             cart,
             addToCart,
-            clearAll
+            clearAll,
+            increase,
+            decrease,
+            remove
         }}>
             {children}
         </CartContext.Provider>

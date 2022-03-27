@@ -54,7 +54,7 @@ export const CartItem = ({ cart }: Props) => {
                     alignItems="end"
                     justifyContent="space-around"
                 >
-                    <CartItem__Qty qty={cart.qty} />
+                    <CartItem__Qty qty={cart.qty} id={cart.id} />
 
                     <CartItem__Price price={price * cart.qty} />
                 </VStack>
