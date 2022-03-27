@@ -22,7 +22,7 @@ export const CartItem__Price = ({ price }: Props) => {
                 fontWeight="bold"
                 color="brand.action"
             >
-                 {numeral(price).format('$0,0[.]00')}
+                {numeral(price).format('$0,0[.]00')}
             </Text>
         </VStack>
     )

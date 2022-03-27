@@ -1,4 +1,5 @@
 import { createContext, FC, useContext, useState } from "react"
+import produce from 'immer'
 
 import { Card } from "../types/Card";
 import { Cart } from "../types/Cart";
@@ -14,9 +15,16 @@ const CartContext = createContext<CartContextState>(defaultValues);
 export const CartWrapper: FC = ({ children }) => {
     const [cart, setCart] = useState<Cart[]>([]);
 
-
     function addToCart(card: Card) {
-        setCart([...cart, { card, qty: 1 }]);
+        setCart(
+            produce(cart, state => {
+                state.push({
+                    id: Date.now(),
+                    card,
+                    qty: 1
+                })
+            })
+        )
     }
     
 

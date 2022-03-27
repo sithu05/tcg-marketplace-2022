@@ -25,6 +25,10 @@ type Props = {
 export const CartModal = ({ isOpen, onClose }: Props) => {
     const { cart } = useCartContext();
 
+    const count = cart.reduce((num, cart) => num + cart.qty, 0);
+    const total = cart.reduce((price, cart) => {
+        return price + (cart.qty * cart.card.cardmarket.prices.averageSellPrice)
+    }, 0);
 
     return (
         <Modal isCentered isOpen={isOpen} onClose={onClose}>
@@ -50,8 +54,8 @@ export const CartModal = ({ isOpen, onClose }: Props) => {
                             <VStack
                                 spacing="25px"
                             >
-                                {cart.map((item, index) => (
-                                    <CartItem key={index} cart={item} />
+                                {cart.map((item) => (
+                                    <CartItem key={item.id} cart={item} />
                                 ))}
                             </VStack>
                         </Box>
@@ -77,7 +81,10 @@ export const CartModal = ({ isOpen, onClose }: Props) => {
                             variant="link">
                             Clear all
                         </Button>
-                        <CartModal__Totals />
+                        <CartModal__Totals
+                            count={count}
+                            total={total}
+                        />
                         <CartModal__Paynow />
                     </Stack>
                 </ModalBody>
