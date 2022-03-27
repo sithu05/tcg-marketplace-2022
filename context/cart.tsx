@@ -7,7 +7,8 @@ import { CartContextState } from "../types/CartContextState"
 
 const defaultValues: CartContextState = {
     cart: [],
-    addToCart: (card: Card) => {}
+    addToCart: (card: Card) => {},
+    clearAll: () => {}
 };
 
 const CartContext = createContext<CartContextState>(defaultValues);
@@ -26,12 +27,16 @@ export const CartWrapper: FC = ({ children }) => {
             })
         )
     }
-    
+
+    function clearAll() {
+        setCart([]);
+    }
 
     return (
         <CartContext.Provider value={{
             cart,
-            addToCart
+            addToCart,
+            clearAll
         }}>
             {children}
         </CartContext.Provider>

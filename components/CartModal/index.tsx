@@ -23,7 +23,7 @@ type Props = {
 };
 
 export const CartModal = ({ isOpen, onClose }: Props) => {
-    const { cart } = useCartContext();
+    const { cart, clearAll } = useCartContext();
 
     const count = cart.reduce((num, cart) => num + cart.qty, 0);
     const total = cart.reduce((price, cart) => {
@@ -78,7 +78,9 @@ export const CartModal = ({ isOpen, onClose }: Props) => {
                         <Button
                             size="xs"
                             fontWeight="normal"
-                            variant="link">
+                            variant="link"
+                            onClick={clearAll}
+                        >
                             Clear all
                         </Button>
                         <CartModal__Totals
