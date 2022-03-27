@@ -19,7 +19,7 @@ export const useCards = ({ name }: Props) => {
     let query = '';
 
     if (name) {
-        query += `name:"${name}"`;
+        query += `name:${name}*`;
     }
 
     if (query) {
