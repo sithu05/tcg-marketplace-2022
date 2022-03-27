@@ -11,7 +11,9 @@ const overrides = {
         brand: {
             primary: '#1D1C1C',
             secondary: '#6A6969',
-            placeholder: '#BCBBBB'
+            placeholder: '#BCBBBB',
+            alert: "#FD2929",
+            action: "#298BFD"
         }
     },
     components: {
