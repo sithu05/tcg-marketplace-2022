@@ -9,6 +9,7 @@ const overrides = {
     styles,
     colors: {
         brand: {
+            primary: '#1D1C1C',
             secondary: '#6A6969',
             placeholder: '#BCBBBB'
         }

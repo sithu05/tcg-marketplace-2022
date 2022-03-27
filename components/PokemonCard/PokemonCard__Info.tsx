@@ -8,9 +8,11 @@ type Props = {
     rarity: string;
     price: number;
     stocks: number;
+    selected: boolean;
+    handleOnSelect: () => void;
 };
 
-const PokemonCard__Info = ({ name, rarity, price, stocks }: Props) => {
+const PokemonCard__Info = ({ name, rarity, price, stocks, selected, handleOnSelect }: Props) => {
     return (
         <Flex
             pt="74px"
@@ -26,6 +28,7 @@ const PokemonCard__Info = ({ name, rarity, price, stocks }: Props) => {
                 <Text
                     fontWeight="bold"
                     fontSize="25px"
+                    color="brand.primary"
                 >
                     {name}
                 </Text>
@@ -50,7 +53,7 @@ const PokemonCard__Info = ({ name, rarity, price, stocks }: Props) => {
                 left="50%"
                 transform="translate(-50%,50%)"
             >
-                <PokemonCard__Button />
+                <PokemonCard__Button selected={selected} handleOnClick={handleOnSelect} />
             </Box>
         </Flex>
     )

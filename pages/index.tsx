@@ -8,9 +8,16 @@ import { SearchForm, SearchFormValues } from '../components/SearchForm'
 import { ShowMore } from '../components/ShowMore'
 import { useCards } from '../data/useCards'
 
+import { Card } from '../types/Card'
+
+type Cart = {
+	card: Card,
+	qty: number
+};
 
 const Home: NextPage = () => {
 	const [searchParams, setSearchParams] = useState<SearchFormValues>();
+	const [cart, setCart] = useState<Cart[]>([]);
 
 	const { data, fetchNextPage, isLoading } = useCards(searchParams || {});
 	const { ref, inView } = useInView();
@@ -21,6 +28,13 @@ const Home: NextPage = () => {
 		}
 	}, [inView, fetchNextPage]);
 
+	function handleOnSelect(card: Card) {
+		const existed = cart.find((item) => item.card.id === card.id);
+
+		if (!existed) {
+			setCart([ ...cart, { card, qty: 1 }]);
+		}
+	}
 
   	return (
 		<main>
@@ -33,7 +47,11 @@ const Home: NextPage = () => {
 							{page.data.map(item => (
 								<GridItem key={item.id}>
 									<Center>
-										<PokemonCard card={item} />
+										<PokemonCard
+											card={item}
+											selected={cart.findIndex(_cart => _cart.card.id === item.id) > -1}
+											onSelect={handleOnSelect}
+										/>
 									</Center>
 								</GridItem>
 							))}

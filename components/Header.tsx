@@ -14,6 +14,7 @@ export const Header = () => {
                 left="50%"
                 transform="translateX(-50%)"
                 fontWeight="bold"
+                color="brand.primary"
                 fontSize="24px">TCG Marketplace</Text>
 
             <Box

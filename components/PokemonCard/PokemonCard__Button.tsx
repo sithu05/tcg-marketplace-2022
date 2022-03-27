@@ -1,13 +1,22 @@
 import { Button } from "@chakra-ui/react"
 
-const PokemonCard__Button = () => {
+type Props = {
+    selected?: boolean;
+    handleOnClick: () => void;
+};
+
+const PokemonCard__Button = ({
+    selected = false,
+    handleOnClick
+}: Props) => {
     return (
         <Button
+            onClick={handleOnClick}
             width="217px"
             height="47px"
-            bgColor="#FDCE29"
+            bgColor={selected ? 'brand.primary' : '#FDCE29'}
             borderRadius="25px"
-            color="#1D1C1C"
+            color={selected ? "white" : "brand.primary"}
             fontSize="20px"
             fontWeight="medium"
             boxShadow="0px 3px 5px rgba(0, 0, 0, 0.07)"
