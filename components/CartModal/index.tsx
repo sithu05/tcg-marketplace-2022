@@ -9,8 +9,8 @@ import {
     Stack,
     VStack
 } from "@chakra-ui/react"
+import { useRef } from "react";
 
-import { CartModal__Paynow } from "./CartModal__Paynow";
 import { CartModal__Totals } from "./CartModal__Totals";
 import { CartModal__Close } from "./CartModal__Close";
 import { CartItem } from "../CartItem";
@@ -23,6 +23,8 @@ type Props = {
 };
 
 export const CartModal = ({ isOpen, onClose }: Props) => {
+    const initialRef = useRef<HTMLButtonElement>(null);
+
     const { cart, clearAll } = useCartContext();
 
     const count = cart.reduce((num, cart) => num + cart.qty, 0);
@@ -31,7 +33,12 @@ export const CartModal = ({ isOpen, onClose }: Props) => {
     }, 0);
 
     return (
-        <Modal isCentered isOpen={isOpen} onClose={onClose}>
+        <Modal
+            initialFocusRef={initialRef}
+            isCentered
+            isOpen={isOpen}
+            onClose={onClose}
+        >
             <ModalOverlay />
             <ModalContent
                 maxWidth="416px"
@@ -87,7 +94,19 @@ export const CartModal = ({ isOpen, onClose }: Props) => {
                             count={count}
                             total={total}
                         />
-                        <CartModal__Paynow />
+
+                        <Button
+                            ref={initialRef}
+                            width={217}
+                            fontSize="20px"
+                            fontWeight="500"
+                            colorScheme="blue"
+                            borderRadius="25px"
+                            bgColor="brand.action"
+                            boxShadow="0px 3px 5px rgba(0, 0, 0, 0.07)"
+                        >
+                            Pay now
+                        </Button>
                     </Stack>
                 </ModalBody>
 
