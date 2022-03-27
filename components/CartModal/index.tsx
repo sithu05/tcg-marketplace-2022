@@ -6,12 +6,16 @@ import {
     ModalContent,
     ModalFooter,
     ModalOverlay,
-    Stack
+    Stack,
+    VStack
 } from "@chakra-ui/react"
 
 import { CartModal__Paynow } from "./CartModal__Paynow";
 import { CartModal__Totals } from "./CartModal__Totals";
 import { CartModal__Close } from "./CartModal__Close";
+import { CartItem } from "../CartItem";
+
+import { useCartContext } from "../../context/cart";
 
 type Props = {
     isOpen: boolean,
@@ -19,6 +23,9 @@ type Props = {
 };
 
 export const CartModal = ({ isOpen, onClose }: Props) => {
+    const { cart } = useCartContext();
+
+
     return (
         <Modal isCentered isOpen={isOpen} onClose={onClose}>
             <ModalOverlay />
@@ -26,11 +33,41 @@ export const CartModal = ({ isOpen, onClose }: Props) => {
                 maxWidth="416px"
             >
                 <ModalBody
-                    pb="40px"
+                    p="0"
                     bgColor="white"
                     borderRadius="20px"
                 >
+                    <Box
+                        m="40px"
+                        mb="0"
+                        position="relative"
+                    >
+                        <Box
+                            minH="370px"
+                            maxH="370px"
+                            overflowY="scroll"
+                        >
+                            <VStack
+                                spacing="25px"
+                            >
+                                {cart.map((item, index) => (
+                                    <CartItem key={index} cart={item} />
+                                ))}
+                            </VStack>
+                        </Box>
+
+                        <Box
+                            position="absolute"
+                            bottom="0"
+                            left="0"
+                            width="100%"
+                            height="58px"
+                            bgGradient="linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, #FFFFFF 100%)"
+                        />
+                    </Box>
+                        
                     <Stack
+                        mb="40px"
                         spacing="26px"
                         alignItems="center"
                     >
@@ -43,8 +80,6 @@ export const CartModal = ({ isOpen, onClose }: Props) => {
                         <CartModal__Totals />
                         <CartModal__Paynow />
                     </Stack>
-                
-
                 </ModalBody>
 
                 <ModalFooter p="0">
