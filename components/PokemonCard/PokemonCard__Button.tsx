@@ -2,16 +2,16 @@ import { Button } from "@chakra-ui/react"
 
 type Props = {
     selected?: boolean;
-    handleOnClick: () => void;
+    onClick: () => void;
 };
 
 const PokemonCard__Button = ({
     selected = false,
-    handleOnClick
+    onClick
 }: Props) => {
     return (
         <Button
-            onClick={handleOnClick}
+            onClick={onClick}
             width="217px"
             height="47px"
             bgColor={selected ? 'brand.primary' : '#FDCE29'}
@@ -20,7 +20,9 @@ const PokemonCard__Button = ({
             fontSize="20px"
             fontWeight="medium"
             boxShadow="0px 3px 5px rgba(0, 0, 0, 0.07)"
-        >Select Card</Button>
+        >
+            {selected ? 'Selected' : 'Select Card'}
+        </Button>
     )
 }
 

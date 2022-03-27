@@ -8,15 +8,19 @@ import theme from '../theme';
 import { Header } from '../components/Header';
 import { Footer } from '../components/Footer';
 
+import { CartWrapper } from '../context/cart';
+
 function MyApp({ Component, pageProps }: AppProps) {
 	const [queryClient] = useState(() => new QueryClient());
 
 	return (
 		<QueryClientProvider client={queryClient}>
 			<ChakraProvider theme={theme}>
-				<Header/>
-				<Component {...pageProps} />
-				<Footer />
+				<CartWrapper>
+					<Header/>
+					<Component {...pageProps} />
+					<Footer />
+				</CartWrapper>
 			</ChakraProvider>
 		</QueryClientProvider>
 	);
