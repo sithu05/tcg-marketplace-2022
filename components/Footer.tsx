@@ -1,4 +1,5 @@
-import { Box } from "@chakra-ui/react"
+import { Box, Center } from "@chakra-ui/react"
+import { ViewCart } from "./ViewCart"
 
 export const Footer = () => {
     return (
@@ -10,7 +11,11 @@ export const Footer = () => {
             bgGradient="linear-gradient(180deg, rgba(248, 248, 248, 0) 0%, #F8F8F8 100%)"
             zIndex="1"
         >
-            {/* sooner */}
+            <Center
+                height="full"
+            >
+                <ViewCart />
+            </Center>
         </Box>
     )
 }
