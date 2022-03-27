@@ -1,4 +1,4 @@
-import { useInfiniteQuery, useQuery } from 'react-query'
+import { useInfiniteQuery } from 'react-query'
 import { Card } from '../types/Card';
 
 type Response = {
@@ -11,9 +11,12 @@ type Response = {
 
 type Props = {
     name?: string;
+    type?: string;
+    rarity?: string;
+    set?: string;
 }
 
-export const useCards = ({ name }: Props) => {
+export const useCards = ({ name, type, rarity, set }: Props) => {
     let url = 'https://api.pokemontcg.io/v2/cards?pageSize=5';
 
     let query = '';
@@ -22,11 +25,23 @@ export const useCards = ({ name }: Props) => {
         query += `name:${name}*`;
     }
 
+    if (type) {
+        query += ` types:${type}`;
+    }
+
+    if (rarity) {
+        query += ` rarity:${rarity}`;
+    }
+
+    if (set) {
+        query += ` set.id:${set}`;
+    }
+
     if (query) {
         url += `&q=${query}`;
     }
 
-    return useInfiniteQuery(['cards', `${name}`],
+    return useInfiniteQuery(['cards', `${name}-${type}-${rarity}-${set}`],
         ({ pageParam = 1 }) => {
             return fetch(`${url}&page=${pageParam}`)
                 .then(response => response.json())
