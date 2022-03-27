@@ -1,4 +1,4 @@
-import { Box, Center, Grid, GridItem } from '@chakra-ui/react'
+import { Box, Center, Container, Grid, GridItem, useBreakpointValue } from '@chakra-ui/react'
 import type { NextPage } from 'next'
 import { Fragment, useEffect, useState } from 'react'
 import { useInView } from 'react-intersection-observer'
@@ -11,6 +11,11 @@ import { useCards } from '../data/useCards'
 const Home: NextPage = () => {
 	const [searchParams, setSearchParams] = useState<SearchFormValues>();
 
+	const columns = useBreakpointValue({
+		base: 'repeat(1, 1fr)',
+		lg: 'repeat(3, 1fr)'
+	});
+
 	const { data, fetchNextPage, isLoading } = useCards(searchParams || {});
 	const { ref, inView } = useInView();
 
@@ -22,32 +27,35 @@ const Home: NextPage = () => {
 
   	return (
 		<main>
-			<SearchForm onSubmit={setSearchParams} />
+			<Container
+				maxW="container.lg"
+			>
+				<SearchForm onSubmit={setSearchParams} />
 
-			<Box mt="40px">
-				<Grid templateColumns="repeat(1, 1fr)" gap="103px">
-					{data && data.pages.map((page, index) => (
-						<Fragment key={index}>
-							{page.data.map(item => (
-								<GridItem key={item.id}>
-									<Center>
-										<PokemonCard
-											card={item}
-										/>
-									</Center>
-								</GridItem>
-							))}
-						</Fragment>
-					))}
-				</Grid>
+				<Box mt="40px">
+					<Grid templateColumns={columns} rowGap="103px" columnGap="73px">
+						{data && data.pages.map((page, index) => (
+							<Fragment key={index}>
+								{page.data.map(item => (
+									<GridItem key={item.id}>
+										<Center>
+											<PokemonCard
+												card={item}
+											/>
+										</Center>
+									</GridItem>
+								))}
+							</Fragment>
+						))}
+					</Grid>
 
-				{!isLoading && (
-					<Center ref={ref}>
-						<ShowMore />
-					</Center>
-				)}
-			</Box>
-
+					{!isLoading && (
+						<Center ref={ref}>
+							<ShowMore />
+						</Center>
+					)}
+				</Box>
+			</Container>
 		</main>
   	)
 }

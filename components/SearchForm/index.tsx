@@ -38,18 +38,28 @@ export const SearchForm = ({ onSubmit }: Props) => {
             >
                 <Box
                     width="full"
-                    maxWidth="383px"
+                    maxWidth={{
+                        base: '383px',
+                        lg: '675px'
+                    }}
                 >
                     <Form>
-                        <SearchForm__Input />
-
                         <Stack
-                            mt="16px"
                             spacing="16px"
-                            direction="row">
-                            <SearchForm__Type />
-                            <SearchForm__Rarity />
-                            <SearchForm__Set />
+                            direction={{
+                                base: "column",
+                                lg: "row"
+                            }}
+                        >
+                            <SearchForm__Input />
+
+                            <Stack
+                                spacing="16px"
+                                direction="row">
+                                <SearchForm__Type />
+                                <SearchForm__Rarity />
+                                <SearchForm__Set />
+                            </Stack>
                         </Stack>
 
                         <SearchForm__AutoSubmit />
